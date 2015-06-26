@@ -7,10 +7,8 @@
     - postfix
     - firewalld
 
-- name: "Habilita servicios"
-  service: name={{ item }} state=started
-  with_items:
-    - named
+- name: "Instalación de Epel"
+  yum: name=epel-release state=present
 
 - name: "Instalación grupo Development tools" 
   yum: name="@Development tools" state=present
@@ -37,5 +35,10 @@
   copy: src=ansible.local.zone dest=/var/named/ owner=named group=named mode="644"
   notify: restart named
 
-- name: "Instala Zimbra"
+- name: "Habilita servicios"
+  service: name={{ item }} state=started
+  with_items:
+    - named
+
+#- name: "Instala Zimbra"
   
