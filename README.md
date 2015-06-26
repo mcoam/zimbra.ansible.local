@@ -8,7 +8,7 @@ Repositorio para la instalación de Zimbra en Vagrant provisionado con ansible.
 
 ## Instalación
 
-**1. Clonar repositorio
+** 1. Clonar repositorio
 ```
 git clone git@github.com:mcoam/zimbra.ansible.local.git
 ``` 
