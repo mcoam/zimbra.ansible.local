@@ -1,0 +1,14 @@
+$TTL    3600
+@               IN SOA  ns.ansible.local.     root (
+                                        2015260601      ; serial (d. adams)
+                                        3H              ; refresh
+                                        15M             ; retry
+                                        1W              ; expiry
+                                        1D )            ; minimum
+
+                IN NS   ns.ansible.local.
+                IN A    10.10.0.254
+                IN MX 5 zimbra.ansible.local.
+ns              IN A    10.10.0.254
+mail            IN A    10.10.0.254
+zimbra		IN A	10.10.0.254

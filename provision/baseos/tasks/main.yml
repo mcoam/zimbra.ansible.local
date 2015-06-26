@@ -1,0 +1,41 @@
+- name: "Deshabilita Selinux"
+  selinux: state=disabled
+
+- name: "Deshabilta servicios"
+  service: name={{ item }} state=stopped
+  with_items:
+    - postfix
+    - firewalld
+
+- name: "Habilita servicios"
+  service: name={{ item }} state=started
+  with_items:
+    - named
+
+- name: "Instalación grupo Development tools" 
+  yum: name="@Development tools" state=present
+
+- name: "Instalación grupo Development Libraries"
+  yum: name="@Development Libraries" state=present
+
+- name: "Instala paquetes Base"
+  yum: name={{ item }} state=present
+  with_items:
+    - "{{ system_packages }}"
+
+- name: "Copia resolv.conf"
+  copy: src=resolv.conf dest=/etc/resolv.conf owner=root group=root mode="644"
+
+- name: "Copia tabla hosts"
+  copy: src=hosts dest=/etc/hosts owner=root group=root mode="644"
+
+- name: "Copia archivo configuración de Bind"
+  copy: src=named.conf dest=/etc/named.conf owner=root group=root mode="644"
+  notify: restart named
+
+- name: "Copia archivo de zona DNS"
+  copy: src=ansible.local.zone dest=/var/named/ owner=named group=named mode="644"
+  notify: restart named
+
+- name: "Instala Zimbra"
+  
